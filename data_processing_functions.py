@@ -178,3 +178,12 @@ def plot_categorical(df, column):
     
     plt.tight_layout()
     plt.show()
+    
+def plot_histogram(df, column, bins=30):
+    plt.figure(figsize=(10, 6))
+    plt.hist(df[column], bins=bins, edgecolor='black')
+    plt.title(f'Distribuição de {column}')
+    plt.xlabel(column)
+    plt.ylabel('Frequência')
+    plt.tight_layout()
+    plt.show()
