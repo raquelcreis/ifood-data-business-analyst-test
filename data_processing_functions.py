@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Funções de Verificação
 def check_missing_values(df):
@@ -74,23 +76,23 @@ def check_outliers_column(df, column, factor=1.5):
 
 # Funções de Tratamento
 def treat_missing_values_column_median(df, column):
-    df_copy = df.copy()
-    median = df_copy[column].median()
-    df_copy[column] = df_copy[column].fillna(median)
+    
+    median = df[column].median()
+    df[column] = df[column].fillna(median)
     print(f"Valores ausentes na coluna '{column}' foram tratados com sucesso usando a mediana ({median}).")
     
     return 
 
 def treat_outliers_column_median(df, column):
-    df_copy = df.copy()
-    Q1 = df_copy[column].quantile(0.25)
-    Q3 = df_copy[column].quantile(0.75)
+
+    Q1 = df[column].quantile(0.25)
+    Q3 = df[column].quantile(0.75)
     IQR = Q3 - Q1
     lower_bound = Q1 - 1.5 * IQR
     upper_bound = Q3 + 1.5 * IQR
     
-    median = df_copy[column].median()
-    df_copy[column] = np.where((df_copy[column] < lower_bound) | (df_copy[column] > upper_bound), median, df_copy[column])
+    median = df[column].median()
+    df[column] = np.where((df[column] < lower_bound) | (df[column] > upper_bound), median, df[column])
     print(f"Outliers na coluna '{column}' foram tratados com sucesso usando a mediana ({median}).")
     
     return
@@ -135,3 +137,44 @@ def treat_outliers_column_median(df, column):
     
     print("\nPrimeiros 10 valores outliers:")
     print(outliers.head(10).tolist())
+
+# Funções de Visualizações de Dados
+
+def create_frequency_table(df, column_name):
+
+    counts = df[column_name].value_counts()
+    percentages = df[column_name].value_counts(normalize=True).mul(100).round(2)
+    
+    result = pd.concat([counts, percentages], axis=1, keys=['Contagem', 'Porcentagem'])
+    result['Porcentagem'] = result['Porcentagem'].astype(str) + '%'
+    
+    result = result.sort_values('Contagem', ascending=False)
+    
+    print(f"\nDistribuição de {column_name}:")
+    print(result)
+    
+    return
+
+def plot_categorical(df, column):
+    plt.figure(figsize=(8, 8))
+    
+    value_counts = df[column].value_counts()
+    
+    ax = sns.barplot(x=value_counts.index, y=value_counts.values, order=value_counts.index)
+    
+    plt.title(f'Distribuição de {column}')
+    plt.xlabel(column)
+    plt.ylabel('Contagem')
+    
+    total = len(df)
+    for i, p in enumerate(ax.patches):
+        height = p.get_height()
+        percentage = f'{100 * height / total:.1f}%'
+        label = f'{int(height)}\n({percentage})'
+        ax.text(p.get_x() + p.get_width()/2, height, 
+                label, 
+                ha='center', va='bottom',
+                rotation=0)
+    
+    plt.tight_layout()
+    plt.show()
