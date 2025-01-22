@@ -1,6 +1,15 @@
 # ifood-data-business-analyst-test
-## last update 19/02/2020
+## Raquel Cardoso Reis
 <br><br>
-This case is used for hiring Data Analysts for the iFood Brain team. Instructions are in the pdf file. <br><br>
 
-If you are interested in joining our team, or getting to know more about iFood and our team, feel free to send an e-mail to "ifoodbrain_hiring@ifood.com.br".<br><br>
+### Descrição
+Este projeto analisa dados de uma campanha de marketing para otimizar futuras estratégias. A análise inclui segmentação de clientes, análise de comportamento de compra e modelagem preditiva para identificar clientes com maior propensão à conversão.
+
+### Estrutura
+
+├── data/              # Arquivos de dados
+├── analysis/          # Notebooks de análise
+└── utils/             # Funções auxiliares
+
+### Bibliotecas Utilizadas
+requirements.txt
