@@ -9,8 +9,8 @@ Este projeto analisa dados de uma campanha de marketing para otimizar futuras es
 
 ### Estrutura
 ```
-├── data/              # Arquivos de dados
 ├── analysis/          # Notebooks de análise
+├── data/              # Arquivos de dados
 └── utils/             # Funções auxiliares
 ```
 
