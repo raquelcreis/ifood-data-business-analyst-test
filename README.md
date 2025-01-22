@@ -9,9 +9,12 @@ Este projeto analisa dados de uma campanha de marketing para otimizar futuras es
 
 ### Estrutura
 ```
-├── analysis/          # Notebooks de análise
+eda.ipynb              # Notebook com a análise exploratória dos dados
+segmentation.ipynb     # Notebook com a segmentação de clusters
+predictive_model.ipynb # Notebook com o modelo preditivo
+
 ├── data/              # Arquivos de dados
-└── utils/             # Funções auxiliares
+├── utils/             # Funções auxiliares
 ```
 
 ### Bibliotecas Utilizadas
